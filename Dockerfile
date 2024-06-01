@@ -1,12 +1,31 @@
-FROM maven:3.8.4-openjdk-21 AS build
+# Start with the JDK 22 image
+FROM openjdk:22-jdk-slim as build
+
+# Install curl and Maven
+RUN apt-get update && \
+    apt-get install -y curl && \
+    apt-get install -y maven
+
+# Set the working directory in the Docker container
 WORKDIR /app
-COPY pom.xml .
-RUN mvn dependency:go-offline -B
-COPY src ./src
+
+# Copy the local code to the Docker container
+COPY . .
+
+# Build the application
 RUN mvn clean package -DskipTests
 
-FROM openjdk:21-jdk-slim
+# For the final image, use the same JDK 22 base
+FROM openjdk:22-jdk-slim
+
+# Set the working directory in the Docker container
 WORKDIR /app
-COPY --from=build /app/target/calculator-0.0.1-SNAPSHOT.jar /app/calculator.jar
+
+# Copy the JAR file from the build stage to the final stage
+COPY --from=build /app/target/*.jar /app/application.jar
+
+# Set the port number the container should expose
 EXPOSE 8080
-ENTRYPOINT ["java", "-jar", "/app/calculator.jar"]
+
+# Run the application
+CMD ["java", "-jar", "/app/application.jar"]
