@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grade Calculator</title>
+    <link rel="stylesheet" href="/css/Calculator.css">
+    <script src="/js/Calculator.js" defer></script>
+</head>
+<body>
+   
+    <header>Grade Calculator</header>
+    <main>
+        <h1>Activities</h1>
+        <section class="sec1">
+            Give grades to the numeric activities:
+        </section>
+        <section class="sec2">
+            <table id="Calculator">
+                <tr><th>Name</th><th>Short Name</th><th>Weight</th><th>Grade</th><th>Percent</th></tr>
+                <tr>
+                    <td>Activity 1</td>
+                    <td>A1</td><td><input type="number" class="Weight"></td>
+                    <td><input type="number" class="score"> / <input type="number" class="max-score"></td>
+                    <td class="Percent"></td>
+                </tr>
+                <tr>
+                    <td>Activity 2</td>
+                    <td>A2</td><td><input type="number" class="Weight"></td>
+                    <td><input type="number" class="score"> / <input type="number" class="max-score"></td>
+                    <td class="Percent"></td>
+                </tr>
+            </table>
+        </section>
+        <section class="sec3">
+            <input type="button" value="Add Row" id="Addrow">
+        </section>
+        <section class="sec4" id="Result">
+            Result<br>
+            <div id="mean-result-placeholder"></div>
+        </section>
+        
+        <section class="sec5">
+            <input type="button" value ="WEIGHTED" id="WEIGHTED">
+            <input type="button" value="MEAN" id="MEAN">
+        </section>
+        
+       
+    </main>
+    <footer>
+        
+    </footer>
+    
+</body>
+</html>
